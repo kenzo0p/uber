@@ -3,6 +3,7 @@ dotenv.config()
 import express from 'express';
 import cors from 'cors'
 import dbConnect from './db/db.js';
+import cookieParser from 'cookie-parser'
 const app = express()
 import userRoutes from './routes/user.routes.js'
 dbConnect()
@@ -11,6 +12,7 @@ dbConnect()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 
 
 // routes
