@@ -8,7 +8,7 @@ export const registerUser = async(req,res,next) => {
         return res.status(400).json({errors:errors.array()})
     }
     const {fullname , email , password} = req.body;
-    console.log(req.body);
+
     const hashPassword = await User.hashPassword(password)
     const user = await creatUser({
         firstname:fullname.firstname ,
