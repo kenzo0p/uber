@@ -4,8 +4,9 @@ import express from 'express';
 import cors from 'cors'
 import dbConnect from './db/db.js';
 import cookieParser from 'cookie-parser'
-const app = express()
 import userRoutes from './routes/user.routes.js'
+import captainRoutes from './routes/captain.routes.js'
+const app = express()
 dbConnect()
 
 // middlerwares
@@ -18,6 +19,7 @@ app.use(cookieParser())
 // routes
 
 app.use("/api/users" , userRoutes)
+app.use("/api/captains" , captainRoutes)
 
 
 

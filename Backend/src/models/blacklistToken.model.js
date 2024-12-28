@@ -16,3 +16,5 @@ const blacklistTokenSchema = new mongoose.Schema({
 const BlacklistToken = mongoose.model('BlacklistToken', blacklistTokenSchema);
 
 export default BlacklistToken;
+
+// ttl (time to live) is a value in seconds that specifies how long a document lives in the collection before it is automatically removed.

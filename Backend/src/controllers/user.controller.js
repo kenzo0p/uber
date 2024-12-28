@@ -9,7 +9,10 @@ export const registerUser = async(req,res,next) => {
         return res.status(400).json({errors:errors.array()})
     }
     const {fullname , email , password} = req.body;
-
+    const isUserAlreadyExist = await User.findOne({email})
+    if(isUserAlreadyExist) {
+        return res.status(401).json({message:"User already exist"}) 
+    }
     const hashPassword = await User.hashPassword(password)
     const user = await creatUser({
         firstname:fullname.firstname ,
