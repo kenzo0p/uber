@@ -1,8 +1,7 @@
 import { Captain } from "../models/captain.model.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import { createCaptain } from "../services/captain.service.js";
 import { validationResult } from "express-validator";
+import BlacklistToken from "../models/blacklistToken.model.js";
 
 export const registerCaptain = async (req, res) => {
   const errors = validationResult(req);
@@ -35,3 +34,35 @@ export const registerCaptain = async (req, res) => {
     return res.status(500).json({ errors: error.message });
   }
 };
+
+export const loginCaptain = async (req,res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(401).json({errors:errors.array()})
+    }
+
+    const {email ,password} = req.body;
+    const captain = await Captain.findOne({email}).select("+password");
+    if(!captain) {
+        return res.status(401).json({message:"Invalid email or password"})
+    }
+    const isPassWordMatch = await captain.comparePassword(password)
+    if(!isPassWordMatch) {
+        return res.status(401).json({message:"Password is incorrect"})
+    }
+    const token = captain.generateAuthToken();
+    res.cookie("token" ,token)
+    return res.status(200).json({token , captain})
+}
+
+
+export const getCaptainProfile  =async(req,res) => {
+    return res.status(200).json(req.captain)
+}
+
+export const logoutCaptain  = async(req,res) => {
+    const token = req.cookies.token || req.headers?.authorization.split(' ')[1]
+    await BlacklistToken.create({token})
+    res.clearCookie('token')
+    return res.status(200).json({message:"Logged out"})
+}
