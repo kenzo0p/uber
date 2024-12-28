@@ -8,7 +8,7 @@ const app = express()
 import userRoutes from './routes/user.routes.js'
 dbConnect()
 
-
+// middlerwares
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
