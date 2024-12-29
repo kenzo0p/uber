@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 function CaptainSignup() {
   const [email, SetEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [captainData, setCaptainData] = useState({});
+
+
+  const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
     setCaptainData({
@@ -21,6 +23,7 @@ function CaptainSignup() {
     setPassword("");
     setFirstname("");
     setLastname("");
+    
   };
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
@@ -69,7 +72,7 @@ function CaptainSignup() {
             placeholder="password"
           />
           <button className="bg-[#111] text-[#fff] mb-3 rounded px-4 py-2  w-full font-semibold text-lg">
-            Login
+            Create Account
           </button>
         </form>
         <p className="text-center">
