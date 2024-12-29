@@ -4,10 +4,13 @@ import Start from "./pages/Start";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
-import CaptainSignup from "./pages/captainSignup";
-import CaptainLogin from "./pages/captainLogin";
 import UserProtectedWrapper from "./pages/UserProtectedWrapper";
 import UserLogout from "./pages/UserLogout";
+import CaptainHome from "./pages/CaptainHome";
+import CaptainProtectedWrapper from "./pages/CaptainProtectedWrapper";
+import CaptainLogin from "./pages/CaptainLogin";
+import CaptainSignup from "./pages/CaptainSignup";
+import CaptainLogout from "./pages/CaptainLogout";
 
 function App() {
   return (
@@ -26,10 +29,30 @@ function App() {
             </UserProtectedWrapper>
           }
         />
-        <Route path="/user/logout" element={<UserProtectedWrapper>
-          <UserLogout/>
-        </UserProtectedWrapper>
-        }/>
+        <Route
+          path="/user/logout"
+          element={
+            <UserProtectedWrapper>
+              <UserLogout />
+            </UserProtectedWrapper>
+          }
+        />
+        <Route
+          path="/captain/logout"
+          element={
+            <CaptainProtectedWrapper>
+              <CaptainLogout />
+            </CaptainProtectedWrapper>
+          }
+        />
+        <Route
+          path="/captain-home"
+          element={
+            <CaptainProtectedWrapper>
+              <CaptainHome />
+            </CaptainProtectedWrapper>
+          }
+        />
       </Routes>
     </div>
   );

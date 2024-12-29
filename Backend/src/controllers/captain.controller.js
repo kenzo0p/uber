@@ -6,13 +6,13 @@ import BlacklistToken from "../models/blacklistToken.model.js";
 export const registerCaptain = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(401).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
   try {
     const { fullname , email, password, vehicle } = req.body;
     const isCaptainAlreadyExist = await Captain.findOne({email});
     if(isCaptainAlreadyExist){
-        return res.status(401).json({message:"Captain already exist"});
+        return res.status(400).json({message:"Captain already exist"});
     }
     const hashPassword = await Captain.hashPassword(password);
     const captain = await createCaptain({
