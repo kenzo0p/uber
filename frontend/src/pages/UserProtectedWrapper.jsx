@@ -14,4 +14,4 @@ function UserProtectedWrapper({children}) {
   return (<>{children}</>);
 }
 
-export default UserProtectedWrapper;
+export default UserProtectedWrapper
