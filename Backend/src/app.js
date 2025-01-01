@@ -6,6 +6,9 @@ import dbConnect from './db/db.js';
 import cookieParser from 'cookie-parser'
 import userRoutes from './routes/user.routes.js'
 import captainRoutes from './routes/captain.routes.js'
+import mapsRoutes from './routes/map.routes.js'
+import rideRoutes from './routes/ride.routes.js'
+
 const app = express()
 dbConnect()
 
@@ -20,6 +23,8 @@ app.use(cookieParser())
 
 app.use("/api/users" , userRoutes)
 app.use("/api/captains" , captainRoutes)
+app.use('/maps' , mapsRoutes)
+app.use('/rides' , rideRoutes)
 
 
 
